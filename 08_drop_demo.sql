@@ -1,14 +1,8 @@
--- Parte 11: DROP
--- Demonstração segura em um banco de teste.
--- NÃO substitua sistema_teste_drop por sistema_academico.
+-- PARTE 7: EXCLUSÃO DE TABELA (DROP)
+-- Remove a tabela Dados_Aluno após a utilização do JSON.
+-- SHOW TABLES permite conferir as tabelas restantes.
 
-CREATE DATABASE sistema_teste_drop;
-USE sistema_teste_drop;
+DROP TABLE Dados_Aluno;
+SHOW TABLES;
 
-CREATE TABLE tabela_teste (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    descricao VARCHAR(50) NOT NULL
-);
-
-DROP TABLE tabela_teste;
-DROP DATABASE sistema_teste_drop;
+-- FIM DO PROJETO
