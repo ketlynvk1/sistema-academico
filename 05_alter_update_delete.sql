@@ -11,3 +11,12 @@ ALTER TABLE Turma
 CHANGE COLUMN ano_letivo ano_letivo_inicio YEAR NOT NULL;
 
 ALTER TABLE Aluno DROP COLUMN email;
+
+-- PARTE 5: ATUALIZAÇÃO E EXCLUSÃO DE DADOS
+-- UPDATE altera informações existentes.
+-- DELETE exclui um registro específico.
+
+UPDATE Aluno SET endereco = 'Rua Atualizada, 150'
+WHERE id_aluno = 1;
+
+DELETE FROM Nota WHERE id_nota = 10;
