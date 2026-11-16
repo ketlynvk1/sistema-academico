@@ -1,30 +1,29 @@
--- Parte 5: Consultas SQL
-USE sistema_academico;
+-- PARTE 3: CONSULTAS E RELACIONAMENTOS (JOIN)
+-- Os JOINs permitem consultar informações relacionadas
+-- que estão armazenadas em tabelas diferentes.
 
--- SELECT
-SELECT * FROM aluno;
+-- 1) INNER JOIN
+SELECT a.nome AS aluno, m.data_matricula, m.status, t.nome_turma
+FROM Aluno a
+INNER JOIN Matricula m ON m.id_aluno = a.id_aluno
+INNER JOIN Turma t ON t.id_turma = m.id_turma;
 
--- WHERE
-SELECT * FROM aluno WHERE id_aluno = 1;
+-- 2) LEFT JOIN
+SELECT a.nome AS aluno, n.valor, n.bimestre
+FROM Aluno a
+LEFT JOIN Nota n ON n.id_aluno = a.id_aluno
+ORDER BY a.nome;
 
--- ORDER BY
-SELECT id_aluno, nome FROM aluno ORDER BY nome ASC;
+-- 3) JOIN
+SELECT d.nome AS disciplina, d.carga_horaria,
+       p.nome AS professor, p.especialidade
+FROM Disciplina d
+INNER JOIN Professor p ON p.id_professor = d.id_professor;
 
--- LIKE
-SELECT id_aluno, nome FROM aluno WHERE nome LIKE 'A%';
-
--- BETWEEN
-SELECT id_aluno, nome, data_nascimento
-FROM aluno
-WHERE data_nascimento BETWEEN '2004-01-01' AND '2005-12-31';
-
--- IN
-SELECT id_aluno, nome FROM aluno WHERE id_aluno IN (1, 3, 5, 7);
-
--- Conferência de quantidade de registros
-SELECT 'ALUNO' AS tabela, COUNT(*) AS total FROM aluno
-UNION ALL SELECT 'TURMA', COUNT(*) FROM turma
-UNION ALL SELECT 'MATRICULA', COUNT(*) FROM matricula
-UNION ALL SELECT 'PROFESSOR', COUNT(*) FROM professor
-UNION ALL SELECT 'DISCIPLINA', COUNT(*) FROM disciplina
-UNION ALL SELECT 'NOTA', COUNT(*) FROM nota;
+-- 4) JOIN com três tabelas
+SELECT a.nome AS aluno, d.nome AS disciplina,
+       n.valor, n.bimestre, n.data_avaliacao
+FROM Nota n
+INNER JOIN Aluno a ON a.id_aluno = n.id_aluno
+INNER JOIN Disciplina d ON d.id_disciplina = n.id_disciplina
+ORDER BY a.nome;
